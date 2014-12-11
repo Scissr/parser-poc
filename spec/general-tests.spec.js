@@ -1,6 +1,7 @@
   describe("scissr-parser.js testing", function() {
-    var scissr = require('../scissr-parser');
     
+    var scissr = require('../src/scissr-parser');
+
     it("should have parser as 'scissr'", function() {
       var tree = scissr.parse("A");
       expect(tree.parser).toBe("scissr");

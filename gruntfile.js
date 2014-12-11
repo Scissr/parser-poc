@@ -1,9 +1,9 @@
 function wrap (parser) {
-	return '/* jshint ignore:end */\nif (typeof module === "object" && typeof define !== "function") {' +
-					'\n\tvar define = function (factory) {' +
-          '\n\t\tmodule.exports = factory(require, exports, module);' +
-    			'\n\t};\n}\n/* jshint ignore:end */' +
-					'\ndefine("scissr-parser", [], function () { return ' + parser + '; });';
+	return "var parser = " +
+		parser + 
+		";if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {" + 
+		"module.exports = parser; } else { if (typeof define === 'function' && define.amd) { " +
+		"define([], function() { return parser; }); } else { window.parser = parser; }}";
 
 }
 

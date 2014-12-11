@@ -7,12 +7,18 @@
     }
   }
 
-  function createElement(name, children){
+  function createElement(name, label, children){
     var item = {
       name: name
     };
     if(children !== null){
       item.nodes = children;
+    }
+    if(label !== null){
+      item.label = label;
+    }
+    else{
+      item.label = name;
     }
     return item;
   }
@@ -49,7 +55,20 @@ array
     }
 
 element 
-  = name: word
+  = label:
+    (
+      firstQuote: quote?
+      value: literal
+      lastQuote: quote?
+      colon
+      {
+        if (firstQuote != lastQuote) {
+          throw new Error("Unterminated string constant.");
+        }
+        return value.join("");
+      }
+    )?
+    name: identifier
     children: ( 
       begin_child 
       content: array 
@@ -59,30 +78,42 @@ element
       }
     )?
     {
-      return createElement(name, children);
+      return createElement(name, label, children);
     }
 
-word
-  = chars: char* 
-    { 
+identifier "identifier"
+  = chars: [0-9a-zA-Z]+
+    {
+      if(chars === null){
+        throw new Error("Identifier expected.");
+      }
       return chars.join(""); 
     }
 
-dot
+literal "literal value"
+  = [A-Za-z_ ]+
+
+colon "colon (:)"
+  = ":"
+
+space
+  = " "+
+
+dot "format specifier (.)"
   = "."
 
-formatter
+formatter "format"
   = "json"
   / "xml"
 
-separator
+separator "seperator (,)"
   = ","
 
-begin_child
+quote "quote (')"
+  = "'"
+
+begin_child "'('"
   = "("
 
-end_child
+end_child "')'"
   = ")"
-
-char
-  = [0-9a-zA-Z]
