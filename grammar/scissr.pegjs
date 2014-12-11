@@ -1,3 +1,23 @@
+{
+  function createTree(format, nodes){
+    return {
+        parser: "scissr",
+        formatter: format !== null ? format : "json",
+        nodes: nodes
+    }
+  }
+
+  function createElement(name, children){
+    var item = {
+      name: name
+    };
+    if(children !== null){
+      item.nodes = children;
+    }
+    return item;
+  }
+}
+
 tree
   = nodes: array 
     format: ( 
@@ -6,12 +26,8 @@ tree
         return formatter; 
       }
     )?
-    { 
-      return {
-        parser: "scissr",
-        formatter: format !== null ? format : "json",
-        nodes: nodes
-      }
+    {
+      return createTree(format, nodes);
     }
 
 array
@@ -43,13 +59,7 @@ element
       }
     )?
     {
-      var item = {
-        name: name
-      };
-      if(children !== null){
-        item.nodes = children;
-      }
-      return item;
+      return createElement(name, children);
     }
 
 word

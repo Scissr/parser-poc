@@ -44,12 +44,8 @@ define("scissr-parser", [], function () { return (function() {
         peg$c2 = function(formatter) { 
                 return formatter; 
               },
-        peg$c3 = function(nodes, format) { 
-              return {
-                parser: "scissr",
-                formatter: format !== null ? format : "json",
-                nodes: nodes
-              }
+        peg$c3 = function(nodes, format) {
+              return createTree(format, nodes);
             },
         peg$c4 = [],
         peg$c5 = function(value) { 
@@ -65,13 +61,7 @@ define("scissr-parser", [], function () { return (function() {
                 return content; 
               },
         peg$c9 = function(name, children) {
-              var item = {
-                name: name
-              };
-              if(children !== null){
-                item.nodes = children;
-              }
-              return item;
+              return createElement(name, children);
             },
         peg$c10 = function(chars) { 
               return chars.join(""); 
@@ -523,6 +513,26 @@ define("scissr-parser", [], function () { return (function() {
 
       return s0;
     }
+
+
+      function createTree(format, nodes){
+        return {
+            parser: "scissr",
+            formatter: format !== null ? format : "json",
+            nodes: nodes
+        }
+      }
+
+      function createElement(name, children){
+        var item = {
+          name: name
+        };
+        if(children !== null){
+          item.nodes = children;
+        }
+        return item;
+      }
+
 
     peg$result = peg$startRuleFunction();
 
