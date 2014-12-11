@@ -7,4 +7,5 @@ target/
 .classpath
 .settings/
 .DS_Store
+.cache
 node_modules/

@@ -1,1 +1,1 @@
-pegjs %1 scissr-parser.js
+grunt peg
