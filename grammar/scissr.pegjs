@@ -91,7 +91,7 @@ identifier "identifier"
     }
 
 literal "literal value"
-  = [A-Za-z_ ]+
+  = [0-9A-Za-z_ ]+
 
 colon "colon (:)"
   = ":"

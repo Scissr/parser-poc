@@ -72,8 +72,8 @@ var parser = (function() {
               return chars.join(""); 
             },
         peg$c15 = { type: "other", description: "literal value" },
-        peg$c16 = /^[A-Za-z_ ]/,
-        peg$c17 = { type: "class", value: "[A-Za-z_ ]", description: "[A-Za-z_ ]" },
+        peg$c16 = /^[0-9A-Za-z_ ]/,
+        peg$c17 = { type: "class", value: "[0-9A-Za-z_ ]", description: "[0-9A-Za-z_ ]" },
         peg$c18 = { type: "other", description: "colon (:)" },
         peg$c19 = ":",
         peg$c20 = { type: "literal", value: ":", description: "\":\"" },

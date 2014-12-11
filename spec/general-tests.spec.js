@@ -44,4 +44,17 @@
       var tree = scissr.parse("A,B,C.xml");
       expect(tree.formatter).toBe("xml");
     });
+
+    it("should infer node label as node name", function() {
+      var tree = scissr.parse("A,B");
+      expect(tree.nodes[0].label).toBe("A");
+      expect(tree.nodes[1].label).toBe("B");
+    });
+
+    it("should assign node label from explict definition", function() {
+      var tree = scissr.parse("'column 1':A,'column 2':B");
+      expect(tree.nodes[0].label).toBe("column 1");
+      expect(tree.nodes[1].label).toBe("column 2");
+    });
+
   });
