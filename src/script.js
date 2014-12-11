@@ -1,4 +1,12 @@
 require(['scissr-parser'], function(scissr){
+
+	function buildErrorMessage(e) {
+    return e.line !== undefined && e.column !== undefined
+      ? "Line " + e.line + ", column " + e.column + ": " + e.message
+      : e.message;
+  }
+
+
 	$(document).on('keydown', '#contentbox', function(e) { 
 		var keyCode = e.keyCode || e.which; 
 
@@ -16,7 +24,7 @@ require(['scissr-parser'], function(scissr){
 	   	output = scissr.parse(input);
 	  }
 	  catch(err) {
-	   	output = err.message;
+	   	output = buildErrorMessage(err);
 	  }
 	    showTree(output);
 	}

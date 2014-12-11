@@ -7,18 +7,19 @@
     }
   }
 
-  function createElement(name, label, children){
+  function createElement(key, alias, children){
     var item = {
-      name: name
+      key: key,
+      data: [],
     };
     if(children !== null){
       item.nodes = children;
     }
-    if(label !== null){
-      item.label = label;
+    if(alias !== null){
+      item.alias = alias;
     }
     else{
-      item.label = name;
+      item.alias = key;
     }
     return item;
   }
@@ -55,7 +56,7 @@ array
     }
 
 element 
-  = label:
+  = alias:
     (
       firstQuote: quote?
       value: literal
@@ -68,7 +69,7 @@ element
         return value.join("");
       }
     )?
-    name: identifier
+    key: identifier
     children: ( 
       begin_child 
       content: array 
@@ -78,7 +79,7 @@ element
       }
     )?
     {
-      return createElement(name, label, children);
+      return createElement(key, alias, children);
     }
 
 identifier "identifier"

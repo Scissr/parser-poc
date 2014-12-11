@@ -59,8 +59,8 @@ var parser = (function() {
         peg$c9 = function(content) { 
                 return content; 
               },
-        peg$c10 = function(label, name, children) {
-              return createElement(name, label, children);
+        peg$c10 = function(alias, key, children) {
+              return createElement(key, alias, children);
             },
         peg$c11 = { type: "other", description: "identifier" },
         peg$c12 = /^[0-9a-zA-Z]/,
@@ -726,18 +726,19 @@ var parser = (function() {
         }
       }
 
-      function createElement(name, label, children){
+      function createElement(key, alias, children){
         var item = {
-          name: name
+          key: key,
+          data: [],
         };
         if(children !== null){
           item.nodes = children;
         }
-        if(label !== null){
-          item.label = label;
+        if(alias !== null){
+          item.alias = alias;
         }
         else{
-          item.label = name;
+          item.alias = key;
         }
         return item;
       }
