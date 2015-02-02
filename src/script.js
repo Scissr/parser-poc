@@ -1,4 +1,4 @@
-require(['scissr-parser'], function(scissr){
+require(['scissr-parser','config'], function(scissr,config){
 
 	function buildErrorMessage(e) {
     return e.line !== undefined && e.column !== undefined
@@ -21,7 +21,9 @@ require(['scissr-parser'], function(scissr){
 	  var input = $("#contentbox").val();
 	  var output;
 	  try {
-	   	output = scissr.parse(input);
+
+    
+	   	output = scissr.parse(input, config);
 	  }
 	  catch(err) {
 	   	output = buildErrorMessage(err);
