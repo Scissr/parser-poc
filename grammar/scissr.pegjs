@@ -7,49 +7,73 @@
     }
   }
 
-  function resolveType(type){
+  function createType(name){
+    return {
+      name: name
+    };
+  }
+
+  function resolveType(type, array){
+//debugger;
+    if (type.value !== undefined) {
+      return "string";
+    }
 
     var types = options.types;
-    var baseType = "object";
+    var baseType =  "string";
 
     if (types !== undefined) {
       var result = types.filter(function(t){
-        return t.name == type;
+        return t.name == type.name;
       });
 
       if (result.length > 0) {
         baseType = result[0].type;
-      };
+      }
+      else {
+        if (array !== null && array.isComplexType == true) {
+          baseType = "object";
+        }
+        
+      }
     };
 
     return baseType;
   }
 
-  function createElement(type, alias, children, array){
-    var resolvers = options.resolvers;
-    var baseType = resolveType(type);
+  function createElement(type, alias, children, array, aa){
+
+    var baseType = resolveType(type, array);
 
       var item = {
-        type: type,
+        type: type.name,
         baseType: baseType,
         isArray: false,
         count: 1,
         data: [],
       };
+      if (type.value !== undefined) {
+        item.value = type.value;
+      }
       if(children !== null){
         item.nodes = children;
+      }
+      if (array !== null){
+        item.isArray = true
+        item.count = array.count;
       }
       if(alias !== null){
         item.alias = alias;
       }
       else{
-        item.alias = type;
+        if (item.isArray){
+          item.alias = type.name + "Array";
+        }
+        else {
+          item.alias = type.name;
+        }
       }
-      if (array !== null){
-        item.isArray = true
-        item.count = array.count;
-
-      }
+      
       return item;
   
   }
@@ -92,22 +116,26 @@ elementArray
 element 
   = alias: alias?
     type: type
+    arrayIdentifier: simpleTypeArray?
     {
-      return createElement(type, alias, undefined,null);
+      return createElement(type, alias, undefined, arrayIdentifier);
     }
   / alias: alias?
     children: ( 
-      begin_child 
+      begin_child
       content: elementArray 
       end_child
       { 
         return content; 
       }
     )
-    arrayIdentifier: valueArray?
+    arrayIdentifier: complexTypeArray?
     {
-      
-      return createElement(undefined, alias, children, arrayIdentifier);
+      var type = {
+        name: "object"
+      };
+
+      return createElement(type, alias, children, arrayIdentifier,"test");
     }
 
 alias "alias"
@@ -122,27 +150,41 @@ alias "alias"
       return value.join("");
     }
 
-  
+identifier
+  = [0-9a-zA-Z]+
 
 type "type"
-  = chars: [0-9a-zA-Z]+
+  = firstQuote: quote
+    chars: literal
+    lastQuote: quote
     {
+      if (firstQuote != lastQuote) {
+        throw new Error("Unterminated string constant.");
+      }
+      return {
+        name: "string",
+        value: chars.join("")
+      };
+    }
+  / chars: identifier
+    {
+      
       if(chars === null){
         throw new Error("Type expected.");
       }
-      return chars.join(""); 
+      return {
+        name: chars.join("")
+      };
     }
 
-valueArray
-  = simpleTypeArray
-  / complexTypeArray
+
 
 complexTypeArray
   = astrix
     count: integer
     {
       return {
-        isComplexType: false,
+        isComplexType: true,
         count: count
       }
     }
@@ -152,7 +194,7 @@ simpleTypeArray
     count: integer
     {
       return {
-        isComplexType: true,
+        isComplexType: false,
         count: count
       }
     }
