@@ -1,6 +1,6 @@
 module.exports = function(config) {
   config.set({
-    frameworks: ['jasmine','amdefine'],
+    frameworks: ['jasmine'],
     files: [
       'src/*.js',
       'spec/*.spec.js'

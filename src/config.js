@@ -1,5 +1,3 @@
-
-
 define([
 	'types/base', 
 	'types/fname',

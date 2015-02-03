@@ -5,7 +5,7 @@
         formatter: format !== null ? format : "json",
         nodes: nodes
     }
-  }
+  } 
 
   function createType(name){
     return {
@@ -19,7 +19,7 @@
       return "string";
     }
 
-    var types = options.types;
+    var types = config.types;
     var baseType =  "string";
 
     if (types !== undefined) {
@@ -31,7 +31,7 @@
         baseType = result[0].type;
       }
       else {
-        if (array !== null && array.isComplexType == true) {
+        if (type.name === "object" || array !== null && array.isComplexType == true) {
           baseType = "object";
         }
         
@@ -60,7 +60,7 @@
       }
       if (array !== null){
         item.isArray = true
-        item.count = array.count;
+        item.count = parseInt(array.count);
       }
       if(alias !== null){
         item.alias = alias;
@@ -211,7 +211,7 @@ literal "literal value"
 integer
   = numbers: [0-9]+
     {
-      return numbers.join(""); 
+      return parseInt(numbers.join("")); 
     }
 
 colon "colon (:)"

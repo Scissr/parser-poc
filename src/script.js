@@ -1,4 +1,4 @@
-require(['scissr-parser','config'], function(scissr,config){
+require(['scissr-parser','config'], function(scissrParser,config){
 
 	function buildErrorMessage(e) {
     return e.line !== undefined && e.column !== undefined
@@ -22,8 +22,8 @@ require(['scissr-parser','config'], function(scissr,config){
 	  var output;
 	  try {
 
-    
-	   	output = scissr.parse(input, config);
+    var scissr = new scissrParser(config);
+	   	output = scissr.parse(input);
 	  }
 	  catch(err) {
 	   	output = buildErrorMessage(err);
