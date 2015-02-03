@@ -16,16 +16,19 @@ describe("Formatter tests", function() {
   });
 
   it("should parse 'xml' formatter", function() {
-    var tree = parser.parse("string,int");
+    var tree = parser.parse("string,int=xml");
     
     expect(tree.formatter).toBe("xml");
     
   });
 
   it("should fail on unsupported formatter", function() {
-    var tree = parser.parse("string,int");
     
-    //todo
+    var action = function(){
+      var tree = parser.parse("string,int=xxx");
+    };
+    
+    expect(action).toThrow();
     
   });
 
