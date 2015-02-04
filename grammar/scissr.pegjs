@@ -1,8 +1,8 @@
 {
-  function createTree(format, nodes){
+  function createTree(key, nodes){
     return {
         parser: "scissr",
-        formatter: format !== null ? format : "json",
+        generator: key !== null ? key : "json",
         nodes: nodes
     }
   } 
@@ -87,8 +87,8 @@ tree
   = nodes: elementArray 
     format: ( 
       equals 
-      formatter: formatter { 
-        return formatter; 
+      generator: generator { 
+        return generator; 
       }
     )?
     {
@@ -223,7 +223,7 @@ space
 equals "format specifier (=)"
   = "="
 
-formatter "format"
+generator "generator"
   = "json"
   / "xml"
 

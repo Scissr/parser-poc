@@ -1,4 +1,4 @@
-describe("Formatter tests", function() {
+describe("Generator tests", function() {
   var parser = require('./settings/parser-instance');
 
   it("should parse empty formatter as 'json'", function() {

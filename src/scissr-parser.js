@@ -34,8 +34,8 @@ var scissrParser = function(config){var parser = (function() {
 
         peg$c0 = peg$FAILED,
         peg$c1 = null,
-        peg$c2 = function(formatter) { 
-                return formatter; 
+        peg$c2 = function(generator) { 
+                return generator; 
               },
         peg$c3 = function(nodes, format) {
               return createTree(format, nodes);
@@ -125,7 +125,7 @@ var scissrParser = function(config){var parser = (function() {
         peg$c37 = { type: "other", description: "format specifier (=)" },
         peg$c38 = "=",
         peg$c39 = { type: "literal", value: "=", description: "\"=\"" },
-        peg$c40 = { type: "other", description: "format" },
+        peg$c40 = { type: "other", description: "generator" },
         peg$c41 = "json",
         peg$c42 = { type: "literal", value: "json", description: "\"json\"" },
         peg$c43 = "xml",
@@ -318,7 +318,7 @@ var scissrParser = function(config){var parser = (function() {
         s2 = peg$currPos;
         s3 = peg$parseequals();
         if (s3 !== peg$FAILED) {
-          s4 = peg$parseformatter();
+          s4 = peg$parsegenerator();
           if (s4 !== peg$FAILED) {
             peg$reportedPos = s2;
             s3 = peg$c2(s4);
@@ -848,7 +848,7 @@ var scissrParser = function(config){var parser = (function() {
       return s0;
     }
 
-    function peg$parseformatter() {
+    function peg$parsegenerator() {
       var s0, s1;
 
       peg$silentFails++;
@@ -958,10 +958,10 @@ var scissrParser = function(config){var parser = (function() {
     }
 
 
-      function createTree(format, nodes){
+      function createTree(key, nodes){
         return {
             parser: "scissr",
-            formatter: format !== null ? format : "json",
+            generator: key !== null ? key : "json",
             nodes: nodes
         }
       } 
