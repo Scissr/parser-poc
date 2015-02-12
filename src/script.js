@@ -1,4 +1,4 @@
-require(['scissr-parser','config'], function(scissrParser,config){
+require(['scissr-parser', 'generators/json', 'config'], function(scissrParser,jsonGenerator, config){
 
 	function buildErrorMessage(e) {
     return e.line !== undefined && e.column !== undefined
@@ -16,6 +16,14 @@ require(['scissr-parser','config'], function(scissrParser,config){
 		} 
 	});
 
+    $(document).on('keyup', '#contentbox', function(e) { 
+    var keyCode = e.keyCode || e.which; 
+
+      go();
+  
+  });
+
+
 	function go() {
 					
 	  var input = $("#contentbox").val();
@@ -23,7 +31,8 @@ require(['scissr-parser','config'], function(scissrParser,config){
 	  try {
 
     var scissr = new scissrParser(config);
-	   	output = scissr.parse(input);
+	   	var tree = scissr.parse(input);
+      output = JSON.parse(jsonGenerator.generate(tree, config));
 	  }
 	  catch(err) {
 	   	output = buildErrorMessage(err);
