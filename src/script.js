@@ -7,14 +7,14 @@ require(['scissr-parser', 'generators/json', 'config'], function(scissrParser,js
   }
 
 
-	$(document).on('keydown', '#contentbox', function(e) { 
-		var keyCode = e.keyCode || e.which; 
+	// $(document).on('keydown', '#contentbox', function(e) { 
+	// 	var keyCode = e.keyCode || e.which; 
 
-		if (keyCode == 9) { 
-		  e.preventDefault(); 
-		  go();
-		} 
-	});
+	// 	if (keyCode == 9) { 
+	// 	  e.preventDefault(); 
+	// 	  go();
+	// 	} 
+	// });
 
     $(document).on('keyup', '#contentbox', function(e) { 
     var keyCode = e.keyCode || e.which; 
