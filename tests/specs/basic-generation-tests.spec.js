@@ -1,5 +1,5 @@
 describe("Basic generation tests", function() {
-  var parser = require('./settings/parser-instance');
+  var parser = requirejs('parser');
 
   it("should parse a basic syntax", function() {
     var tree = parser.parse("joe");

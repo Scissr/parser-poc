@@ -14,21 +14,21 @@
   }
 
   function resolveType(type, array){
-//debugger;
+
     if (type.value !== undefined) {
       return "string";
     }
 
-    var types = config.types;
+    //var types = configuration.types;
     var baseType =  "string";
 
-    if (types !== undefined) {
-      var result = types.filter(function(t){
-        return t.name == type.name;
-      });
+    //if (configuration.types[type.name] !== undefined) {
+      // var result = types.filter(function(t){
+      //   return t.name == type.name;
+      // });
 
-      if (result.length > 0) {
-        baseType = result[0].type;
+      if (configuration.types[type.name] !== undefined) {
+        baseType.resolver = configuration.types[type.name];
       }
       else {
         if (type.name === "object" || array !== null && array.isComplexType == true) {
@@ -36,7 +36,7 @@
         }
         
       }
-    };
+    //};
 
     return baseType;
   }

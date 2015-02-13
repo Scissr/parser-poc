@@ -19,7 +19,10 @@ require(['scissr-parser', 'generators/json', 'config'], function(scissrParser,js
     $(document).on('keyup', '#contentbox', function(e) { 
     var keyCode = e.keyCode || e.which; 
 
+    if (keyCode == 57 || keyCode == 188 || keyCode == 186 || keyCode == 222 || keyCode == 56 || keyCode == 50 || keyCode == 16) {}
+      else{
       go();
+    }
   
   });
 

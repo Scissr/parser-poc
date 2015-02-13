@@ -1,10 +1,12 @@
 define([
 	'types/base', 
-	'types/fname',
+	'types/name',
+	'types/surname',
+	'types/email',
 	'types/age'
 	], 
-	function(baseTypes, fname, age){
-		var types = baseTypes.concat([fname,age]);
+	function(baseTypes, name, surname,email, age){
+		var types = baseTypes.concat([name,surname,email,age]);
 
 		function getType(name){
 			for (var i = 0; i < types.length; i++) {

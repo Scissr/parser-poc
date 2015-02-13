@@ -1,5 +1,5 @@
 describe("Arrays tests", function() {
-  var parser = require('./settings/parser-instance');
+  var parser = requirejs('parser');
 
   it("should parse object arrays without label", function() {
     var tree = parser.parse("(joe)*3");

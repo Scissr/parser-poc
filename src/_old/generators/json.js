@@ -1,8 +1,8 @@
-//if (typeof define !== 'function') { var define = require('amdefine')(module) }
 
-define(function(){
-	
-	var generator = function(tree, configuration){
+
+if (typeof define !== 'function') { var define = require('amdefine')(module) }
+	define([], function(){
+
 		var openCurlBrace = "{",
 		closeCurlBrace = "}",
 		openBlockBrace = "[",
@@ -13,11 +13,10 @@ define(function(){
 		space = " ",
 		indentCount = 0;
 
-		
+		var config;
 
 		function resolveValue(typeName){
-
-			var resolver = configuration.types[typeName];
+			var resolver = config.getType(typeName);
 
 			var value = typeName;
 
@@ -28,7 +27,10 @@ define(function(){
 			return value;
 		}
 
-		function generate(){
+		function generate(tree, settings){
+
+			config = settings;
+
 
 			var output = writeObject(tree.nodes);
 
@@ -38,10 +40,9 @@ define(function(){
 		function needQuotes(type){
 			return (type == "string" || type == "date");
 		}
-
+		
 
 		function writeObject(nodes){
-			debugger;
 			var output = "";
 			indentCount++;
 			output += openCurlBrace;                   
@@ -62,7 +63,7 @@ define(function(){
 						output += openBlockBrace;
 
 						for (var i = 1; i <= node.count; i++) {
-
+							
 							if (node.baseType == "object") {
 								output += writeObject(node.nodes);
 							}
@@ -83,9 +84,9 @@ define(function(){
 						output += closeBlockBrace
 					}
 					else{
-
+						
 						output += writeObject(node.nodes);
-
+						
 					}
 
 				}
@@ -98,26 +99,21 @@ define(function(){
 					output += comma;
 				}
 
-
+				
 
 			}
-
+			
 			output += closeCurlBrace;
 
-			return output;
+		return output;
 			//var json =  JSON.parse(output);
 
 			//return JSON.stringify(json,null,4);
 		}
 
+
 		return {
 			generate: generate
-		};
-	};
-
-
-	return {
-		generator: generator
-	}
-});
+		}
+	});
 

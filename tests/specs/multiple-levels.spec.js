@@ -1,5 +1,5 @@
 describe("Multiple levels tests", function() {
-  var parser = require('./settings/parser-instance');
+  var parser = requirejs('parser');
 
   it("should parse multiple levels", function() {
     var tree = parser.parse("joe,soap,children:(abc,def)*3");
@@ -9,9 +9,9 @@ describe("Multiple levels tests", function() {
     expect(tree.nodes[2].nodes.length).toBe(2);
     expect(tree.nodes[2].isArray).toBe(true);
     expect(tree.nodes[2].count).toBe(3);
-     
+    
   }); 
- 
+  
   it("should parse a child object with label", function() {
     var tree = parser.parse("child:(joe)");
     expect(tree.nodes.length).toBe(1);

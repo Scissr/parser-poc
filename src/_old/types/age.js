@@ -3,7 +3,7 @@ define(function(){
 		name: "age",
 		type: "int",
 		resolve: function(node){
-			return 18;
+			return Math.floor((Math.random() * 100) + 10);
 		}
 	}
 });

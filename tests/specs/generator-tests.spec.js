@@ -1,5 +1,6 @@
 describe("Generator tests", function() {
-  var parser = require('./settings/parser-instance');
+  var parser = requirejs('parser');
+
 
   it("should parse empty generator as 'json'", function() {
     var tree = parser.parse("string,int");
@@ -7,7 +8,7 @@ describe("Generator tests", function() {
     expect(tree.generator).toBe("json");
     
   }); 
- 
+  
   it("should parse 'json' generator", function() {
     var tree = parser.parse("string,int");
     

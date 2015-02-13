@@ -1,0 +1,1 @@
+jasmine-node --color --autotest  --runWithRequireJs --requireJsSetup config.js ./specs
