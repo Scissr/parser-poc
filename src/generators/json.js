@@ -41,7 +41,6 @@ define(function(){
 
 
 		function writeObject(nodes){
-			debugger;
 			var output = "";
 			indentCount++;
 			output += openCurlBrace;                   
