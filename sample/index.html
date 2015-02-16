@@ -6,15 +6,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
     <link rel="stylesheet" type="text/css" href="http://codemirror.net/lib/codemirror.css">
-
+<script type='text/javascript' src="http://codemirror.net/lib/codemirror.js"></script>
+    <script type='text/javascript' src="http://codemirror.net/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="http://codemirror.net/mode/xml/xml.js"></script>
+    <script type="text/javascript" src="vkbeautify.0.99.00.beta.js"></script>
     <style>
     #contentbox {
         width: 100%;
         margin-top: 10px;
     }
-    .CodeMirror{
-        height: auto;
-    }
+   
     </style>
 </head>
 
@@ -30,7 +31,7 @@
 	<div class="row">
 		<div class="col-md-12">
 
-			<div id="jsontree" class="code"></div>
+			<div id="code" name="code" class="code"></div>
 		</div>
 	</div>
 
@@ -39,11 +40,11 @@
     <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script type='text/javascript' src="http://codemirror.net/lib/codemirror.js"></script>
-    <script type='text/javascript' src="http://codemirror.net/mode/javascript/javascript.js"></script>
-    <script type="text/javascript" data-main="config" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.16/require.js"></script>
+    
+    <script type="text/javascript" data-main="script" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.16/require.js"></script>
+    
    
-  <script src="script.js" ></script>
+
 
     
 

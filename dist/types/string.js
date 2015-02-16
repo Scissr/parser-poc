@@ -1,5 +1,6 @@
-{
-	"words":[
+define(function () {
+
+	var words = [
 		"sint",
 		"sunt",
 		"reprehenderit",
@@ -100,6 +101,15 @@
 		"nostrud",
 		"consectetur",
 		"pariatur"
-	]
-	
-}
+		];
+
+	function resolve(){
+		var index = Math.floor((Math.random() * 99) + 1);
+		
+		return words[index];
+	}
+	return {
+		name: "string",
+		resolve: resolve
+	}
+});

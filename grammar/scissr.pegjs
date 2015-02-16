@@ -14,7 +14,6 @@
   }
 
   function resolveType(type, array){
-
     if (type.value !== undefined) {
       return "string";
     }
@@ -27,8 +26,11 @@
       //   return t.name == type.name;
       // });
 
+
+
+
       if (configuration.types[type.name] !== undefined) {
-        baseType.resolver = configuration.types[type.name];
+        baseType = type.name;
       }
       else {
         if (type.name === "object" || array !== null && array.isComplexType == true) {
