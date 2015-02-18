@@ -3,7 +3,7 @@ define(function () {
 		return !(Math.random()+.5|0);
 	}
 	return {
-		name: "bool",
+		baseType: "bool",
 		resolve: resolve
 	}
 });

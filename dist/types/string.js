@@ -109,7 +109,7 @@ define(function () {
 		return words[index];
 	}
 	return {
-		name: "string",
+		baseType: "string",
 		resolve: resolve
 	}
 });

@@ -9,7 +9,8 @@ define(function (require) {
 
 	var generators = {
 		json: require('generators/json'),
-		xml: require('generators/xml')
+		xml: require('generators/xml'),
+		csv: require('generators/csv'),
 	};
 	return {
 

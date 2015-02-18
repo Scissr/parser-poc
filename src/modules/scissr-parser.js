@@ -126,22 +126,21 @@ define(['configuration'], function(configuration){var parser = (function() {
         peg$c38 = "=",
         peg$c39 = { type: "literal", value: "=", description: "\"=\"" },
         peg$c40 = { type: "other", description: "generator" },
-        peg$c41 = "json",
-        peg$c42 = { type: "literal", value: "json", description: "\"json\"" },
-        peg$c43 = "xml",
-        peg$c44 = { type: "literal", value: "xml", description: "\"xml\"" },
-        peg$c45 = { type: "other", description: "seperator (,)" },
-        peg$c46 = ",",
-        peg$c47 = { type: "literal", value: ",", description: "\",\"" },
-        peg$c48 = { type: "other", description: "quote (')" },
-        peg$c49 = "'",
-        peg$c50 = { type: "literal", value: "'", description: "\"'\"" },
-        peg$c51 = { type: "other", description: "'('" },
-        peg$c52 = "(",
-        peg$c53 = { type: "literal", value: "(", description: "\"(\"" },
-        peg$c54 = { type: "other", description: "')'" },
-        peg$c55 = ")",
-        peg$c56 = { type: "literal", value: ")", description: "\")\"" },
+        peg$c41 = function(chars) {
+              return chars.join("")
+            },
+        peg$c42 = { type: "other", description: "seperator (,)" },
+        peg$c43 = ",",
+        peg$c44 = { type: "literal", value: ",", description: "\",\"" },
+        peg$c45 = { type: "other", description: "quote (')" },
+        peg$c46 = "'",
+        peg$c47 = { type: "literal", value: "'", description: "\"'\"" },
+        peg$c48 = { type: "other", description: "'('" },
+        peg$c49 = "(",
+        peg$c50 = { type: "literal", value: "(", description: "\"(\"" },
+        peg$c51 = { type: "other", description: "')'" },
+        peg$c52 = ")",
+        peg$c53 = { type: "literal", value: ")", description: "\")\"" },
 
         peg$currPos          = 0,
         peg$reportedPos      = 0,
@@ -852,22 +851,13 @@ define(['configuration'], function(configuration){var parser = (function() {
       var s0, s1;
 
       peg$silentFails++;
-      if (input.substr(peg$currPos, 4) === peg$c41) {
-        s0 = peg$c41;
-        peg$currPos += 4;
-      } else {
-        s0 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c42); }
+      s0 = peg$currPos;
+      s1 = peg$parseidentifier();
+      if (s1 !== peg$FAILED) {
+        peg$reportedPos = s0;
+        s1 = peg$c41(s1);
       }
-      if (s0 === peg$FAILED) {
-        if (input.substr(peg$currPos, 3) === peg$c43) {
-          s0 = peg$c43;
-          peg$currPos += 3;
-        } else {
-          s0 = peg$FAILED;
-          if (peg$silentFails === 0) { peg$fail(peg$c44); }
-        }
-      }
+      s0 = s1;
       peg$silentFails--;
       if (s0 === peg$FAILED) {
         s1 = peg$FAILED;
@@ -882,6 +872,26 @@ define(['configuration'], function(configuration){var parser = (function() {
 
       peg$silentFails++;
       if (input.charCodeAt(peg$currPos) === 44) {
+        s0 = peg$c43;
+        peg$currPos++;
+      } else {
+        s0 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c44); }
+      }
+      peg$silentFails--;
+      if (s0 === peg$FAILED) {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c42); }
+      }
+
+      return s0;
+    }
+
+    function peg$parsequote() {
+      var s0, s1;
+
+      peg$silentFails++;
+      if (input.charCodeAt(peg$currPos) === 39) {
         s0 = peg$c46;
         peg$currPos++;
       } else {
@@ -897,11 +907,11 @@ define(['configuration'], function(configuration){var parser = (function() {
       return s0;
     }
 
-    function peg$parsequote() {
+    function peg$parsebegin_child() {
       var s0, s1;
 
       peg$silentFails++;
-      if (input.charCodeAt(peg$currPos) === 39) {
+      if (input.charCodeAt(peg$currPos) === 40) {
         s0 = peg$c49;
         peg$currPos++;
       } else {
@@ -917,11 +927,11 @@ define(['configuration'], function(configuration){var parser = (function() {
       return s0;
     }
 
-    function peg$parsebegin_child() {
+    function peg$parseend_child() {
       var s0, s1;
 
       peg$silentFails++;
-      if (input.charCodeAt(peg$currPos) === 40) {
+      if (input.charCodeAt(peg$currPos) === 41) {
         s0 = peg$c52;
         peg$currPos++;
       } else {
@@ -932,26 +942,6 @@ define(['configuration'], function(configuration){var parser = (function() {
       if (s0 === peg$FAILED) {
         s1 = peg$FAILED;
         if (peg$silentFails === 0) { peg$fail(peg$c51); }
-      }
-
-      return s0;
-    }
-
-    function peg$parseend_child() {
-      var s0, s1;
-
-      peg$silentFails++;
-      if (input.charCodeAt(peg$currPos) === 41) {
-        s0 = peg$c55;
-        peg$currPos++;
-      } else {
-        s0 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c56); }
-      }
-      peg$silentFails--;
-      if (s0 === peg$FAILED) {
-        s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c54); }
       }
 
       return s0;
@@ -989,7 +979,7 @@ define(['configuration'], function(configuration){var parser = (function() {
 
 
           if (configuration.types[type.name] !== undefined) {
-            baseType = type.name;
+            baseType = configuration.types[type.name].baseType;
           }
           else {
             if (type.name === "object" || array !== null && array.isComplexType == true) {

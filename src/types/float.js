@@ -4,7 +4,7 @@ define(function () {
 		return nr;
 	}
 	return {
-		name: "float",
+		baseType: "float",
 		resolve: resolve
 	}
 });

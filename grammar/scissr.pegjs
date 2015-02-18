@@ -30,7 +30,7 @@
 
 
       if (configuration.types[type.name] !== undefined) {
-        baseType = type.name;
+        baseType = configuration.types[type.name].baseType;
       }
       else {
         if (type.name === "object" || array !== null && array.isComplexType == true) {
@@ -226,8 +226,10 @@ equals "format specifier (=)"
   = "="
 
 generator "generator"
-  = "json"
-  / "xml"
+  = chars:identifier
+    {
+      return chars.join("")
+    }
 
 separator "seperator (,)"
   = ","

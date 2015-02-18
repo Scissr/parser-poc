@@ -9,7 +9,7 @@ define(function () {
 		return date.toISOString();
 	}
 	return {
-		name: "date",
+		baseType: "date",
 		resolve: resolve
 	}
 });

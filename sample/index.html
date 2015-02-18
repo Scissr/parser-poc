@@ -6,32 +6,118 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
     <link rel="stylesheet" type="text/css" href="http://codemirror.net/lib/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="http://codemirror.net/theme/ambiance.css">
+    <link rel="stylesheet" href="site.css">
 <script type='text/javascript' src="http://codemirror.net/lib/codemirror.js"></script>
     <script type='text/javascript' src="http://codemirror.net/mode/javascript/javascript.js"></script>
     <script type="text/javascript" src="http://codemirror.net/mode/xml/xml.js"></script>
     <script type="text/javascript" src="vkbeautify.0.99.00.beta.js"></script>
+    <link rel="stylesheet" href="cm-movie.css"></link>
     <style>
     #contentbox {
         width: 100%;
         margin-top: 10px;
     }
-   
+   .CodeMirror {
+    font-size: 16px;
+    /* background: #f5f5f5; */
+    border: 1px solid #e3e3e3;
+    height: 400px;
+}
+
+.CodeMirror-tooltip_below{
+    margin-top: 20px;
+}
+
+.CodeMirror-tooltip, .CodeMirror-tooltip__tail:before{
+    background: #E49565;
+    }
     </style>
+
 </head>
 
 <body>
 <div class="container">
-
+<div class="row">
+    <div class="col-md-12 toolbar">
+    </div>
+</div>
 	<div class="row">
 		<div class="col-md-12">
-			<input placeholder="Type Scissr syntax eg.: A,B,C:(D,E)" class="form-control" name="contentbox" id="contentbox" />
-		</div>
-		
-	</div>
-	<div class="row">
-		<div class="col-md-12">
+<div id="errorBar" class="alert alert-danger" style="display:none" role="alert">
+  <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Syntax error!</strong> <span class="errorMessage"></span>
+</div>
+			<textarea id="code" name="code">
+|
+@@@
+#tooltip: {text: "Use Scissr syntax to create instant data snippets", wait:100000}
+tooltip: Use Scissr syntax to create instant data snippets
+type: string
+tooltip: specify the type of the random value
+type: ,
+tooltip: seperate properties with a comma
+type: int,bool
+tooltip: run the "Expand" command (Shift+Tab)
+wait: 1000
+run: {command: "scissrExpand"}
+wait: 3000
+run: {command: "undo"}
 
-			<div id="code" name="code" class="code"></div>
+run: {command: "goLineStart"}
+type: description:
+wait: 500
+tooltip: Use ":" to give properties custom names
+run: {command: "goCharRight", times: 7, beforeDelay: 100}
+type: 'total rating'
+tooltip: wrap multi-word property names in single quotes
+type: :
+run: {command: "goCharRight", times: 4, beforeDelay: 100}
+type: vote:
+run: {command: "goLineEnd", beforeDelay: 100}
+tooltip: run the "Expand" command again
+run: {command: "scissrExpand"}
+wait: 3000
+run: {command: "undo"}
+wait: 1000
+
+type: ,(
+tooltip: Use brackets for denoting child objects
+type: date,float)
+wait: 1000
+run: {command: "scissrExpand"}
+wait: 3000
+run: {command: "undo"}
+
+run: {command: "goLineStart"}
+tooltip: Want arrays?
+type: items:(
+run: {command: "goLineEnd"}
+type: )*5
+tooltip: Use "*" for denoting object arrays with an n-count
+run: {command: "scissrExpand"}
+wait: 3000
+run: {command: "undo"}
+
+run: {command: "selectAll"}
+type: date,string@
+tooltip: Use "@" to for denoting simple arrays
+type: 5
+wait: 2000
+run: {command: "scissrExpand"}
+wait: 3000
+
+run: {command: "selectAll"}
+type: person:(name:string,age:int)*5
+tooltip: The default format is JSON
+type: =
+tooltip: Use "=" to explictly define other supported formats
+type: xml
+tooltip: Like XML :)
+run: {command: "scissrExpand"}
+wait: 3000
+</textarea>
+            
 		</div>
 	</div>
 
@@ -42,8 +128,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     
     <script type="text/javascript" data-main="script" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.16/require.js"></script>
-    
+    <script type="text/javascript"  src="cm-movie-full.min.js"></script>
    
+   <script type="text/javascript">
+
+
+
+
+
+
+
+   </script>
 
 
     
